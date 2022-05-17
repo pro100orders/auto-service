@@ -11,7 +11,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class OrderCreateDTO {
+public class OrderUpdateDTO {
+
+    @Min(value = 0, message = "Order id cannot be less than 0")
+    private Long id;
 
     @Min(value = 0, message = "Car id cannot be less than 0")
     private Long carId;

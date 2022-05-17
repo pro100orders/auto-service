@@ -3,18 +3,18 @@ package com.pro100user.autoservicebackend.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "services")
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class CarService {
+public class AutoService implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class CarService {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private String image;
 
     @Column(name = "price", nullable = false)
@@ -38,6 +38,6 @@ public class CarService {
 
 
 
-    @OneToMany(mappedBy = "carService", fetch = FetchType.LAZY, targetEntity = Order.class)
+    @OneToMany(mappedBy = "autoService", fetch = FetchType.LAZY, targetEntity = Order.class)
     private Set<Order> orders = new HashSet<>();
 }

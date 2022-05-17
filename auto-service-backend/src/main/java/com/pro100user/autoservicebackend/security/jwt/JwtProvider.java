@@ -39,13 +39,8 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            //TODO: Custom Exception and Handler for this Exception
-            throw new RuntimeException("gfgf");
-        }
+        Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+        return true;
     }
 
     public String getLoginFromToken(String token) {

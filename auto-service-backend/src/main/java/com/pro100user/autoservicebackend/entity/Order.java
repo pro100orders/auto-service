@@ -9,17 +9,17 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "orders")
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Order {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +30,9 @@ public class Order {
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = CarService.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = AutoService.class)
     @JoinColumn(name = "service_id", nullable = false)
-    private CarService carService;
+    private AutoService service;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
