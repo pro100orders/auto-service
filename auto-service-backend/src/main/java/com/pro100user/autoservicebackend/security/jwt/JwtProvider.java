@@ -29,7 +29,7 @@ public class JwtProvider {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         claims.put("email", user.getUsername());
-        claims.put("roles", user.getAuthorities());
+        claims.put("roles", user.getRoles());
         claims.put("enabled", user.isEnabled());
         return Jwts.builder()
                 .setClaims(claims)

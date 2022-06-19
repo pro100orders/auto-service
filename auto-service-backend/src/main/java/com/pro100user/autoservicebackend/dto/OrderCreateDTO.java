@@ -13,12 +13,11 @@ import javax.validation.constraints.NotNull;
 @Builder(toBuilder = true)
 public class OrderCreateDTO {
 
-    @Min(value = 0, message = "Car id cannot be less than 0")
+    @NotNull
+    @Min(value = 1, message = "Car id cannot be less than 1")
     private Long carId;
 
-    @Min(value = 0, message = "Service id cannot be less than 0")
-    private Long serviceId;
-
     @NotNull
-    private Status status;
+    @Min(value = 1, message = "Service id cannot be less than 1")
+    private Long serviceId;
 }

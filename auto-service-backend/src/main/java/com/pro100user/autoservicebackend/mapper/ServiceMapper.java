@@ -15,5 +15,5 @@ public interface ServiceMapper {
     AutoService toEntity(ServiceUpdateDTO dto);
 
     ServiceDTO toServiceDTO(AutoService service);
-    List<ServiceDTO> toListServiceDTO(List<AutoService> services);
+    List<ServiceDTO> toServiceDTO(List<AutoService> services);
 }

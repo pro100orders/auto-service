@@ -6,6 +6,8 @@ import com.pro100user.autoservicebackend.dto.UserUpdateDTO;
 import com.pro100user.autoservicebackend.entity.User;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -13,4 +15,5 @@ public interface UserMapper {
     User toEntity(UserUpdateDTO dto);
 
     UserDTO toUserDTO(User user);
+    List<UserDTO> toUserDTO(List<User> users);
 }

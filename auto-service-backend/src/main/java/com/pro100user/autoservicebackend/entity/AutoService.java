@@ -4,8 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,7 +37,6 @@ public class AutoService implements Serializable {
     private String description;
 
 
-
-    @OneToMany(mappedBy = "autoService", fetch = FetchType.LAZY, targetEntity = Order.class)
-    private Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "service", fetch = FetchType.LAZY, targetEntity = Order.class)
+    private List<Order> orders = new ArrayList<>();
 }

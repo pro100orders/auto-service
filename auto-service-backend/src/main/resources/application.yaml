@@ -27,7 +27,6 @@ security:
 
 #app
 app:
-  filepath:
   auth:
     not-auth-endpoints: /login,
                         /registration

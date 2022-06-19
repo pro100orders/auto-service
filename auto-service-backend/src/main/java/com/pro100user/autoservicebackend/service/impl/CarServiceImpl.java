@@ -2,6 +2,7 @@ package com.pro100user.autoservicebackend.service.impl;
 
 import com.pro100user.autoservicebackend.dto.CarCreateDTO;
 import com.pro100user.autoservicebackend.dto.CarDTO;
+import com.pro100user.autoservicebackend.dto.CarListDTO;
 import com.pro100user.autoservicebackend.dto.CarUpdateDTO;
 import com.pro100user.autoservicebackend.entity.Car;
 import com.pro100user.autoservicebackend.mapper.CarMapper;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -50,5 +53,21 @@ public class CarServiceImpl implements CarService {
     public boolean delete(Long carId) {
         carRepository.deleteById(carId);
         return true;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CarDTO> getAll() {
+        return carMapper.toCarDTO(
+                carRepository.findAll()
+        );
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CarListDTO> getAllCarListDTO() {
+        return carMapper.toCarListDTO(
+                carRepository.findAll()
+        );
     }
 }

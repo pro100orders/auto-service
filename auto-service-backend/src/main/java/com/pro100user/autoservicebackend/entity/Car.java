@@ -7,8 +7,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -56,7 +56,6 @@ public class Car implements Serializable {
     private DriveType driveType;
 
 
-
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, targetEntity = Order.class)
-    private Set<Order> orders = new HashSet<>();
+    private List<Order> orders = new ArrayList<>();
 }

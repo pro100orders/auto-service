@@ -7,11 +7,13 @@ import com.pro100user.autoservicebackend.entity.AutoService;
 import com.pro100user.autoservicebackend.mapper.ServiceMapper;
 import com.pro100user.autoservicebackend.repository.ServiceRepository;
 import com.pro100user.autoservicebackend.service.AutoServiceService;
+import com.pro100user.autoservicebackend.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class AutoServiceServiceImpl implements AutoServiceService {
 
     private final ServiceRepository serviceRepository;
     private final ServiceMapper serviceMapper;
+
+    private final ImageService imageService;
 
     @Override
     public ServiceDTO create(ServiceCreateDTO dto) {
@@ -55,9 +59,33 @@ public class AutoServiceServiceImpl implements AutoServiceService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ServiceDTO> getAll() {
-        return serviceMapper.toListServiceDTO(
+        return serviceMapper.toServiceDTO(
                 serviceRepository.findAll()
         );
+    }
+
+    @Override
+    public ServiceDTO setImage(MultipartFile file, Long serviceId) {
+        AutoService entity = serviceRepository.findById(serviceId).orElseThrow();
+        entity.setImage(imageService.save(file, serviceId));
+        return serviceMapper.toServiceDTO(
+                serviceRepository.save(entity)
+        );
+    }
+
+    @Override
+    public boolean updateImage(MultipartFile file, Long serviceId) {
+        AutoService entity = serviceRepository.findById(serviceId).orElseThrow();
+        entity.setImage(imageService.update(entity.getImage(), file, serviceId));
+        serviceRepository.save(entity);
+        return true;
+    }
+
+    @Override
+    public boolean deleteImage(Long serviceId) {
+        AutoService service = serviceRepository.findById(serviceId).orElseThrow();
+        return imageService.delete(service.getImage());
     }
 }

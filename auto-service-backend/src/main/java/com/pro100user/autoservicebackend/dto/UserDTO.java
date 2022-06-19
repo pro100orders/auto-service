@@ -1,6 +1,5 @@
 package com.pro100user.autoservicebackend.dto;
 
-import com.pro100user.autoservicebackend.entity.enums.Sex;
 import lombok.*;
 
 @Getter
@@ -19,6 +18,4 @@ public class UserDTO {
     private String email;
 
     private String phone;
-
-    private Sex sex;
 }

@@ -19,12 +19,8 @@ public interface OrderMapper {
             @Mapping(source = "serviceId", target = "service.id")
     })
     Order toEntity(OrderCreateDTO dto);
-    @Mappings({
-            @Mapping(source = "carId", target = "car.id"),
-            @Mapping(source = "serviceId", target = "service.id")
-    })
     Order toEntity(OrderUpdateDTO dto);
 
     OrderDTO toOrderDTO(Order order);
-    List<OrderDTO> toListOrderDTO(List<Order> orders);
+    List<OrderDTO> toOrderDTO(List<Order> orders);
 }

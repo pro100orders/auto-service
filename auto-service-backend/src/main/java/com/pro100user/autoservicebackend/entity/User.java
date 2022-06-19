@@ -1,13 +1,12 @@
 package com.pro100user.autoservicebackend.entity;
 
 import com.pro100user.autoservicebackend.entity.enums.Role;
-import com.pro100user.autoservicebackend.entity.enums.Sex;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,10 +34,6 @@ public class User implements Serializable {
     @Column(name = "phone", nullable = false, unique = true)
     private String phone;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sex", nullable = false)
-    private Sex sex;
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -49,12 +44,12 @@ public class User implements Serializable {
     )
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles = new ArrayList<>();
 
     @Column(name = "enabled", nullable = false)
-    private boolean enabled = true;
+    private boolean enabled;
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, targetEntity = Car.class)
-    private Set<Car> cars = new HashSet<>();
+    private List<Car> cars = new ArrayList<>();
 }
